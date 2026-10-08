@@ -12,7 +12,7 @@ cursor = conn.cursor()
 cursor.execute("""
 CREATE TABLE if not exists students (
     id INTEGER PRIMARY KEY,
-    uddannelse_id INTEGER,,
+    uddannelse_id INTEGER,
     navn TEXT,
     addresse TEXT,
     e-mail TEXT,
