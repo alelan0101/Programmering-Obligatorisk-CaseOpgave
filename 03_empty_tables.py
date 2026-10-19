@@ -14,7 +14,10 @@ if intput == "studerende":
         conn.commit()
     else:
         print("Sletter person", find, "fra Studernde")
-        cursor.execute("DELETE FROM students WHERE navn=?", (find,))
+        Shoot = ("DELETE FROM students WHERE navn='")
+        Shoot=Shoot.__add__(find)
+        Shoot=Shoot.__add__("'")
+        cursor.execute(Shoot)
         conn.commit()
 elif intput == "uddannelse":
     find=str(input("Hvilken person ønsker du at slette?"))
@@ -26,7 +29,10 @@ elif intput == "uddannelse":
         conn.commit()
     else:
         print("Sletter person", find, "fra uddannelse")
-        cursor.execute("DELETE FROM uddannelse WHERE navn=?", (find,))
+        Shoot = ("DELETE FROM uddannelse WHERE navn='")
+        Shoot=Shoot.__add__(find)
+        Shoot=Shoot.__add__("'")
+        cursor.execute(Shoot)
         conn.commit()
 else:
     print("Ugyldig input")
