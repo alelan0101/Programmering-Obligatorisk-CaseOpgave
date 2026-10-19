@@ -3,17 +3,17 @@ import sqlite3
 database_fil = "students.db"
 
 # Sørg for, at fremmednøgler faktisk bliver kontrolleret af SQLite
-conn = sqlite3.connect(database_fil)
-conn.execute("PRAGMA foreign_keys = ON")
-cur = conn.cursor()
+connection = sqlite3.connect(database_fil)
+connection.execute("PRAGMA foreign_keys = ON")
+cursor = connection.cursor()
 
 # Hvis tabellerne allerede har data, skal vi ikke indsætte det samme igen
-cur.execute("SELECT COUNT(*) FROM students")
-antal_for = cur.fetchone()[0]
-if antal_for > 0:
-    print(f"Tabellen students indeholder allerede {antal_for} rækker - "
+cursor.execute("SELECT COUNT(*) FROM students")
+antal_students = cursor.fetchone()[0]
+if antal_students > 0:
+    print(f"Tabellen students indeholder allerede {antal_students} rækker - "
           f"kør 03_empty_tables.py først, hvis du vil indsætte data igen.")
-    conn.close()
+    connection.close()
     raise SystemExit
 
 # ---------------------------------------------------------------
@@ -27,8 +27,8 @@ uddannelser = [
     ("Handelsuddannelse (HG)",),
 ]
 
-for udd in uddannelser:
-    cur.execute("INSERT INTO uddannelse (navn) VALUES (?)", udd)
+for uddannelse in uddannelser:
+    cursor.execute("INSERT INTO uddannelse (navn) VALUES (?)", uddannelse)
 
 # ---------------------------------------------------------------
 # Tabel 2: students (100 rækker)
@@ -138,19 +138,19 @@ students = [
 ]
 
 # Indsæt alle students
-for stud in students:
-    cur.execute("""
+for student in students:
+    cursor.execute("""
         INSERT INTO students (navn, addresse, email, fødselsdag, uddannelse_id, telefon_nummer)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, stud)
+    """, student)
 
 # Gem alle ændringerne i databasen
-conn.commit()
+connection.commit()
 
 # Vis hvor mange rækker, der nu er i tabellerne
-cur.execute("SELECT COUNT(*) FROM uddannelse")
-print(f"Uddanelse indeholder nu {cur.fetchone()[0]} rækker.")
-cur.execute("SELECT COUNT(*) FROM students")
-print(f"students indeholder nu {cur.fetchone()[0]} rækker.")
+cursor.execute("SELECT COUNT(*) FROM uddannelse")
+print(f"Uddanelse indeholder nu {cursor.fetchone()[0]} rækker.")
+cursor.execute("SELECT COUNT(*) FROM students")
+print(f"students indeholder nu {cursor.fetchone()[0]} rækker.")
 
-conn.close()
+connection.close()
