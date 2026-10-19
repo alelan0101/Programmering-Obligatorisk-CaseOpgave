@@ -10,9 +10,11 @@ if intput == "studerende":
     if find == "alt":
         print("Sletter alt fra students")
         cursor.execute("DELETE FROM students")
+        conn.commit()
     else:
         print("Sletter person", find, "fra Studernde")
-        cursor.execute("DELETE FROM students WHERE id=?", (find,))
+        cursor.execute("DELETE FROM students WHERE navn=?", (find,))
+        conn.commit()
 elif intput == "uddannelse":
     find=str(input("Hvilken person ønsker du at slette?"))
     conn = sqlite3.connect('students.db')
@@ -20,8 +22,10 @@ elif intput == "uddannelse":
     if find == "alt":
         print("Sletter alt fra uddannelse")
         cursor.execute("DELETE FROM uddannelse")
+        conn.commit()
     else:
         print("Sletter person", find, "fra uddannelse")
-        cursor.execute("DELETE FROM uddannelse WHERE id=?", (find,))
+        cursor.execute("DELETE FROM uddannelse WHERE navn=?", (find,))
+        conn.commit()
 else:
     print("Ugyldig input")
