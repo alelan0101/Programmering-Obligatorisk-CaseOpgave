@@ -3,6 +3,7 @@
 import sqlite3
 
 intput = input(str("Hvilken table ønsker du at slette fra?")).lower()
+#Bruges til at finde ud af hvor der søges. Nedenunder identificeret prgorammet hvad du forsøger at fjerne fra den liste.
 if intput == "studerende":
     find = input(str("Hvilken person ønsker du at slette?"))
     conn = sqlite3.connect('students.db')
