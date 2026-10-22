@@ -1,8 +1,8 @@
 import sqlite3
 i = 0
-hvor=input(str("Hvilken databse søger du I? ")).lower()
-id = input(str("Hvilken identifikation ønsker du at bruge? "))
-spec = input(str("Sekundær identification: "))
+hvor=input(str("Hvilken tabel søger du I? ")).lower()
+id = input(str("Hvilket kolonne ønsker du at bruge? "))
+spec = input(str("Sekundær kolonne: "))
 #Skriv hvad du leder efter så printer den det hele
 conn = sqlite3.connect('students.db')
 cursor=conn.cursor()
